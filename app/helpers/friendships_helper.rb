@@ -13,12 +13,14 @@ module FriendshipsHelper
         
         (link_to 'Add Friend',friendships_path(params: { friendship: { friend_id: user.id, user_id: current_user.id } }),method: :post, class: 'btn btn-primary')
       elsif friendship.confirmed
-        'Already Friends'
+        content_tag(:button, "Already friends", class: ["btn", "btn-success", "disabled"])
+
       elsif friendship.user_id == user.id
         (link_to 'Accept Friendship', friendship_path(friendship.id), method: :put, class: 'btn btn-warning') +
         (link_to 'Reject Friendship', friendship_path(friendship.id), method: :delete, class: 'btn btn-warning')
       else
-        (link_to 'Pending Response', class: 'btn btn-warning')
+        content_tag(:button, "Pending Response", class: ["btn", "btn-warning", "disabled"])
+
       end
     end
   end
