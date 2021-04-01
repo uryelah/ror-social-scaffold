@@ -1,6 +1,23 @@
-<li>
-  Name: <%= user.name %>
-  <span class="profile-link">
-    <%= link_to 'See Profile',  user_path(user), class: 'profile-link' %>
-  </span>
-</li>
+
+<div class="container">
+
+<table class="table">
+  <thead>
+    <tr class="text-center">
+
+      <th scope="col">Name</th>
+      <th scope="col">Profile</th>
+      <th scope="col">Friend Status</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="text-center">
+      <td class="text-center"><%= user.name %></td>
+      <td class="text-center"><%= link_to 'See Profile',  user_path(user), class: 'profile-link' %></td>
+      <td class="text-center"><%= friendship_button(user) %></td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
