@@ -10,17 +10,15 @@ module FriendshipsHelper
     friendship = verify_friendship(user)
     if current_user != user
       if friendship.nil?
-        content_tag(:div,
-                    (button_to 'Invite to be friends',
-                               friendships_path(params: { friendship: { friend_id: user.id, user_id: current_user.id } }),
-                               method: :post, class: 'button-friendship'), class: 'button-friendship')
+        
+        (link_to 'Add Friend',friendships_path(params: { friendship: { friend_id: user.id, user_id: current_user.id } }),method: :post, class: 'btn btn-primary')
       elsif friendship.confirmed
         'Already Friends'
       elsif friendship.user_id == user.id
-        content_tag(:div, (button_to 'Accept Friendship', friendship_path(friendship.id), method: :put) +
-                            (button_to 'Reject Friendship', friendship_path(friendship.id), method: :delete))
+        (link_to 'Accept Friendship', friendship_path(friendship.id), method: :put, class: 'btn btn-warning') +
+        (link_to 'Reject Friendship', friendship_path(friendship.id), method: :delete, class: 'btn btn-warning')
       else
-        content_tag(:p, 'Pending Response', class: 'button-friendship status pending')
+        (link_to 'Pending Response', class: 'btn btn-warning')
       end
     end
   end
